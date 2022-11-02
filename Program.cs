@@ -50,6 +50,8 @@ Console.WriteLine("Prezzo ivato: " + prodotto1.GetPrezzoIvato());
 //Nome esteso
 prodotto1.NomeEsteso();
 
+Console.WriteLine(prodotto1.CodicePadLeft());
+
 //stampa intero prodotto 
 //prodotto1.Stampa();
 
@@ -65,12 +67,12 @@ public class Prodotto
 
     public Prodotto()
     {
-        codice = new Random().Next(1, 100000000);
+        codice = Codice();
     }
 
     public Prodotto(string nome, string descrizione)
     {
-        codice = new Random().Next(1, 100000000);
+        codice = Codice();
         this.nome = nome;
         this.descrizione = descrizione;
     }
@@ -83,6 +85,12 @@ public class Prodotto
         Console.WriteLine("Prezzo netto: " + GetPrezzo() + " euro");
         Console.WriteLine("Prezzo ivato: " + GetPrezzoIvato() + " euro");
         Console.WriteLine("Iva: " + iva);
+    }
+
+    public int Codice()
+    {
+        codice = new Random().Next(1, 100000000);
+        return codice;
     }
 
     //leggere il codice
@@ -111,8 +119,6 @@ public class Prodotto
 ;   }
     
 
-
-
     public double GetPrezzo()
     {
         return prezzo;
@@ -126,8 +132,24 @@ public class Prodotto
         return prezzo + (prezzo * 0.22);
     }
 
+
+
     public void NomeEsteso()
     {
         Console.WriteLine(codice + " " + nome);
+    }
+
+
+
+    public string CodicePadLeft()
+    {
+        string codiceStringa = Convert.ToString(this.codice);
+
+        while(codiceStringa.Length < 8)
+        {
+            codiceStringa = '0' + codiceStringa;
+        }
+
+        return codiceStringa;
     }
 }

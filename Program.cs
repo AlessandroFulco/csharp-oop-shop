@@ -30,14 +30,15 @@ Console.WriteLine(prodotto1.GetCodice());
 
 //accessibili sia lettura che scrittura
 //leggere il nome
-Console.WriteLine(prodotto1.GetNome());
+Console.WriteLine(prodotto1.nome);
 //settare il nome
-//prodotto1.SetNome("samsung");
+//prodotto1.nome = "samsung";
 
 //leggere il descrizione
-Console.WriteLine(prodotto1.GetDescrizione());
-//settare il nome
-//prodotto1.SetDescrizione("ciao sono la nuova descrizione tramite metodo");
+Console.WriteLine(prodotto1.descrizione);
+//settare la descrizione
+//prodotto1.descrizione = "sono la nuova descrizione del prodotto";
+
 
 
 //set prezzo
@@ -53,7 +54,8 @@ prodotto1.NomeEsteso();
 Console.WriteLine(prodotto1.CodicePadLeft());
 
 //stampa intero prodotto 
-//prodotto1.Stampa();
+prodotto1.Stampa();
+
 
 
 
@@ -65,11 +67,13 @@ public class Prodotto
     private double prezzo;
     private int iva;
 
+    //costruttore senza parametri
     public Prodotto()
     {
         codice = Codice();
     }
 
+    //costruttore con parametri
     public Prodotto(string nome, string descrizione)
     {
         codice = Codice();
@@ -77,6 +81,7 @@ public class Prodotto
         this.descrizione = descrizione;
     }
 
+    //stampa dell'intero prodotto
     public void Stampa()
     {
         Console.WriteLine("Codice prodotto: " + codice);
@@ -87,7 +92,8 @@ public class Prodotto
         Console.WriteLine("Iva: " + iva);
     }
 
-    public int Codice()
+    //creazione codice prodotto da utilizzare nel costruttore
+    private int Codice()
     {
         codice = new Random().Next(1, 100000000);
         return codice;
@@ -98,49 +104,31 @@ public class Prodotto
     {
         return codice;
     }
-
-    //leggere o modificare il nome
-    public string GetNome()
-    {
-        return nome;
-    }
-    public void SetNome(string input)
-    {
-        this.nome = input;
-;   }
-    //leggere o modificare la descrizione 
-    public string GetDescrizione()
-    {
-        return descrizione;
-    }
-    public void SetDescrizione(string input)
-    {
-        this.descrizione = input;
-;   }
     
-
+    //leggere il prezzo
     public double GetPrezzo()
     {
         return prezzo;
     }
+    //settare il prezzo
     public void SetPrezzo(double input)
     {
         this.prezzo = input;
     }
+    //leggere il prezzo ivato
     public double GetPrezzoIvato()
     {
         return prezzo + (prezzo * 0.22);
     }
 
-
-
+    //ritorna il codice prodotto concatenato con il nome del prodotto
     public void NomeEsteso()
     {
         Console.WriteLine(codice + " " + nome);
     }
 
 
-
+    //BONUS: legge il codice prodotto creato ed inserisce tanti 0 tante quante posizioni mancano fino a che la lunghezza del codice prodotto sia di 8 caratteri
     public string CodicePadLeft()
     {
         string codiceStringa = Convert.ToString(this.codice);

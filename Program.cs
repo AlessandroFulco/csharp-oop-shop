@@ -44,9 +44,9 @@ Console.WriteLine(prodotto1.descrizione);
 //set prezzo
 prodotto1.SetPrezzo(500.99);
 //prezzo senza iva
-Console.WriteLine("Prezzo netto: " + prodotto1.GetPrezzo());
+Console.WriteLine("Prezzo netto: " + prodotto1.GetPrezzo() + " euro");
 //prezzo ivato
-Console.WriteLine("Prezzo ivato: " + prodotto1.GetPrezzoIvato());
+Console.WriteLine("Prezzo ivato: " + prodotto1.GetPrezzoIvato() + " euro");
 
 //Nome esteso
 prodotto1.NomeEsteso();
@@ -54,7 +54,7 @@ prodotto1.NomeEsteso();
 Console.WriteLine(prodotto1.CodicePadLeft());
 
 //stampa intero prodotto 
-prodotto1.Stampa();
+//prodotto1.Stampa();
 
 
 
@@ -118,7 +118,9 @@ public class Prodotto
     //leggere il prezzo ivato
     public double GetPrezzoIvato()
     {
-        return prezzo + (prezzo * 0.22);
+        prezzo += (prezzo * 0.22);
+        prezzo = Math.Round(prezzo, 2);
+        return prezzo;
     }
 
     //ritorna il codice prodotto concatenato con il nome del prodotto

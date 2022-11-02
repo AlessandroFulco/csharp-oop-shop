@@ -19,7 +19,7 @@
 
 
 // istanzia prodotto con tutte le informazioni usando il secondo costruttore
-Prodotto prodotto1 = new Prodotto("realme", "octacore, 12GB RAM, quattro fotocamere", 500.99, 22);
+Prodotto prodotto1 = new Prodotto("realme", "octacore, 12GB RAM, quattro fotocamere");
 // istanzia prodotto con solo il codice random usando il primo costruttore
 //Prodotto prodotto2 = new Prodotto();
 
@@ -40,16 +40,18 @@ Console.WriteLine(prodotto1.GetDescrizione());
 //prodotto1.SetDescrizione("ciao sono la nuova descrizione tramite metodo");
 
 
+//set prezzo
+prodotto1.SetPrezzo(500.99);
 //prezzo senza iva
-Console.WriteLine(prodotto1.Prezzo());
+Console.WriteLine("Prezzo netto: " + prodotto1.GetPrezzo());
 //prezzo ivato
-Console.WriteLine(prodotto1.PrezzoIvato());
+Console.WriteLine("Prezzo ivato: " + prodotto1.GetPrezzoIvato());
 
 //Nome esteso
 prodotto1.NomeEsteso();
 
 //stampa intero prodotto 
-prodotto1.Stampa();
+//prodotto1.Stampa();
 
 
 
@@ -66,13 +68,11 @@ public class Prodotto
         codice = new Random().Next(1, 100000000);
     }
 
-    public Prodotto(string nome, string descrizione, double prezzo, int iva)
+    public Prodotto(string nome, string descrizione)
     {
         codice = new Random().Next(1, 100000000);
         this.nome = nome;
         this.descrizione = descrizione;
-        this.prezzo = prezzo;
-        this.iva = iva;
     }
 
     public void Stampa()
@@ -80,8 +80,8 @@ public class Prodotto
         Console.WriteLine("Codice prodotto: " + codice);
         Console.WriteLine("Nome prodotto: " + nome);
         Console.WriteLine("Descrizione prodotto: " + descrizione);
-        Console.WriteLine("Prezzo netto: " + prezzo + " euro");
-        Console.WriteLine("Prezzo ivato: " + PrezzoIvato() + " euro");
+        Console.WriteLine("Prezzo netto: " + GetPrezzo() + " euro");
+        Console.WriteLine("Prezzo ivato: " + GetPrezzoIvato() + " euro");
         Console.WriteLine("Iva: " + iva);
     }
 
@@ -113,11 +113,15 @@ public class Prodotto
 
 
 
-    public double Prezzo()
+    public double GetPrezzo()
     {
         return prezzo;
     }
-    public double PrezzoIvato()
+    public void SetPrezzo(double input)
+    {
+        this.prezzo = input;
+    }
+    public double GetPrezzoIvato()
     {
         return prezzo + (prezzo * 0.22);
     }

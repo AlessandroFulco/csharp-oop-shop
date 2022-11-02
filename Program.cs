@@ -118,9 +118,9 @@ public class Prodotto
     //leggere il prezzo ivato
     public double GetPrezzoIvato()
     {
-        prezzo += (prezzo * 0.22);
-        prezzo = Math.Round(prezzo, 2);
-        return prezzo;
+        double prezzoIvato =  prezzo + (prezzo * 0.22);
+        prezzoIvato = Math.Round(prezzoIvato, 2);
+        return prezzoIvato;
     }
 
     //ritorna il codice prodotto concatenato con il nome del prodotto

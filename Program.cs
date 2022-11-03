@@ -23,34 +23,33 @@ Prodotto prodotto1 = new Prodotto("realme", "octacore, 12GB RAM, quattro fotocam
 // istanzia prodotto con solo il codice random usando il primo costruttore
 //Prodotto prodotto2 = new Prodotto();
 
-//accessibile solo in lettura
 //stampa il codice prodotto
-Console.WriteLine(prodotto1.GetCodice());
+Console.WriteLine(prodotto1.Codice);
 
 
-//accessibili sia lettura che scrittura
 //settare il nome
 //prodotto1.SetNome("Samsung");
 
 //leggere il nome
-Console.WriteLine(prodotto1.GetNome());
+Console.WriteLine(prodotto1.Nome);
 
 
-//accessibili sia lettura che scrittura
 //settare la descrizione
 //prodotto1.SetDescrizione("Ciao sono la nuova descrizione");
 
 //leggere la descrizione
-Console.WriteLine(prodotto1.GetDescrizione());
+Console.WriteLine(prodotto1.Descrizione);
 
 
 
 //set prezzo
-prodotto1.SetPrezzo(500.99);
+prodotto1.Prezzo = 500.99;
+//set iva
+prodotto1.Iva = 22;
 //prezzo senza iva
-Console.WriteLine("Prezzo netto: " + prodotto1.GetPrezzo() + " euro");
+Console.WriteLine("Prezzo netto: " + prodotto1.Prezzo + " euro");
 //prezzo ivato
-Console.WriteLine("Prezzo ivato: " + prodotto1.GetPrezzoIvato() + " euro");
+Console.WriteLine("Prezzo ivato: " + prodotto1.PrezzoIvato + " euro");
 
 //Nome esteso
 prodotto1.NomeEsteso();
@@ -65,111 +64,120 @@ Console.WriteLine(prodotto1.CodicePadLeft());
 
 public class Prodotto
 {
-    private int codice;
-    private string nome;
-    private string descrizione;
-    private double prezzo;
-    private int iva;
+    public int Codice { get; private set;  }
+    public string Nome { get; set; }
+    public string Descrizione { get; set; }
+    public double Prezzo { get; set; }
+    public int Iva { get; set; }
+    public double PrezzoIvato
+    {
+        get
+        {
+            return Math.Round(Prezzo + (Prezzo / 100 * Iva), 2 );
+        }
+    }
 
     //costruttore senza parametri
     public Prodotto()
     {
-        codice = Codice();
+        Codice = GeneratoreCodiceProdotto();
     }
 
     //costruttore con parametri
     public Prodotto(string nome, string descrizione)
     {
-        codice = Codice();
-        this.nome = nome;
-        this.descrizione = descrizione;
+        Codice = GeneratoreCodiceProdotto();
+        Nome = nome;
+        this.Descrizione = descrizione;
     }
 
     //stampa dell'intero prodotto
     public void Stampa()
     {
-        Console.WriteLine("Codice prodotto: " + codice);
-        Console.WriteLine("Nome prodotto: " + nome);
-        Console.WriteLine("Descrizione prodotto: " + descrizione);
-        Console.WriteLine("Prezzo netto: " + GetPrezzo() + " euro");
-        Console.WriteLine("Prezzo ivato: " + GetPrezzoIvato() + " euro");
-        Console.WriteLine("Iva: " + iva);
+        Console.WriteLine("Codice prodotto: " + Codice);
+        Console.WriteLine("Nome prodotto: " + Nome);
+        Console.WriteLine("Descrizione prodotto: " + Descrizione);
+        Console.WriteLine("Prezzo netto: " + Prezzo + " euro");
+        Console.WriteLine("Prezzo ivato: " + PrezzoIvato + " euro");
+        Console.WriteLine("Iva: " + Iva);
     }
 
     //creazione codice prodotto da utilizzare nel costruttore
-    private int Codice()
+    private int GeneratoreCodiceProdotto()
     {
                                 // 1 a 99999999
-        codice = new Random().Next(1, 100000000);
-        return codice;
-    }
-
-    //leggere il codice
-    public int GetCodice()
-    {
-        return codice;
-    }
-
-
-    //leggere il nome
-    public string GetNome()
-    {
-        return nome;
-    }
-    //settare il nome
-    public void SetNome(string input)
-    {
-        this.nome = input;
-    }
-
-
-    //leggere la descrizione
-    public string GetDescrizione()
-    {
-        return descrizione;
-    }
-    //settare la descrizione
-    public void SetDescrizione(string input)
-    {
-        this.descrizione = input;
-    }
-
-    
-    //leggere il prezzo
-    public double GetPrezzo()
-    {
-        return prezzo;
-    }
-    //settare il prezzo
-    public void SetPrezzo(double input)
-    {
-        this.prezzo = input;
-    }
-    //leggere il prezzo ivato
-    public double GetPrezzoIvato()
-    {
-        double prezzoIvato =  prezzo + (prezzo * 0.22);
-        prezzoIvato = Math.Round(prezzoIvato, 2);
-        return prezzoIvato;
+        Codice = new Random().Next(1, 100000000);
+        return Codice;
     }
 
     //ritorna il codice prodotto concatenato con il nome del prodotto
     public void NomeEsteso()
     {
-        Console.WriteLine(codice + " " + nome);
+        Console.WriteLine(Codice + " " + Nome);
     }
 
 
     //BONUS: legge il codice prodotto creato ed inserisce tanti 0 tante quante posizioni mancano fino a che la lunghezza del codice prodotto sia di 8 caratteri
     public string CodicePadLeft()
     {
-        string codiceStringa = Convert.ToString(this.codice);
+        string codiceStringa = Convert.ToString(this.Codice);
 
-        while(codiceStringa.Length < 8)
+        while (codiceStringa.Length < 8)
         {
             codiceStringa = '0' + codiceStringa;
         }
 
         return codiceStringa;
     }
+
+    ////leggere il codice
+    //public int GetCodice()
+    //{
+    //    return Codice;
+    //}
+
+
+    ////leggere il nome
+    //public string GetNome()
+    //{
+    //    return nome;
+    //}
+    ////settare il nome
+    //public void SetNome(string input)
+    //{
+    //    this.nome = input;
+    //}
+
+
+    ////leggere la descrizione
+    //public string GetDescrizione()
+    //{
+    //    return descrizione;
+    //}
+    ////settare la descrizione
+    //public void SetDescrizione(string input)
+    //{
+    //    this.descrizione = input;
+    //}
+
+
+    ////leggere il prezzo
+    //public double GetPrezzo()
+    //{
+    //    return prezzo;
+    //}
+    ////settare il prezzo
+    //public void SetPrezzo(double input)
+    //{
+    //    this.prezzo = input;
+    //}
+    ////leggere il prezzo ivato
+    //public double GetPrezzoIvato()
+    //{
+    //    double prezzoIvato =  Prezzo + (Prezzo * 0.22);
+    //    prezzoIvato = Math.Round(prezzoIvato, 2);
+    //    return prezzoIvato;
+    //}
+
+
 }

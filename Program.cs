@@ -29,15 +29,19 @@ Console.WriteLine(prodotto1.GetCodice());
 
 
 //accessibili sia lettura che scrittura
-//leggere il nome
-Console.WriteLine(prodotto1.nome);
 //settare il nome
-//prodotto1.nome = "samsung";
+//prodotto1.SetNome("Samsung");
 
-//leggere il descrizione
-Console.WriteLine(prodotto1.descrizione);
+//leggere il nome
+Console.WriteLine(prodotto1.GetNome());
+
+
+//accessibili sia lettura che scrittura
 //settare la descrizione
-//prodotto1.descrizione = "sono la nuova descrizione del prodotto";
+//prodotto1.SetDescrizione("Ciao sono la nuova descrizione");
+
+//leggere la descrizione
+Console.WriteLine(prodotto1.GetDescrizione());
 
 
 
@@ -62,8 +66,8 @@ Console.WriteLine(prodotto1.CodicePadLeft());
 public class Prodotto
 {
     private int codice;
-    public string nome;
-    public string descrizione;
+    private string nome;
+    private string descrizione;
     private double prezzo;
     private int iva;
 
@@ -95,6 +99,7 @@ public class Prodotto
     //creazione codice prodotto da utilizzare nel costruttore
     private int Codice()
     {
+                                // 1 a 99999999
         codice = new Random().Next(1, 100000000);
         return codice;
     }
@@ -104,6 +109,31 @@ public class Prodotto
     {
         return codice;
     }
+
+
+    //leggere il nome
+    public string GetNome()
+    {
+        return nome;
+    }
+    //settare il nome
+    public void SetNome(string input)
+    {
+        this.nome = input;
+    }
+
+
+    //leggere la descrizione
+    public string GetDescrizione()
+    {
+        return descrizione;
+    }
+    //settare la descrizione
+    public void SetDescrizione(string input)
+    {
+        this.descrizione = input;
+    }
+
     
     //leggere il prezzo
     public double GetPrezzo()

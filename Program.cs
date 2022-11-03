@@ -52,7 +52,7 @@ Console.WriteLine("Prezzo netto: " + prodotto1.Prezzo + " euro");
 Console.WriteLine("Prezzo ivato: " + prodotto1.PrezzoIvato + " euro");
 
 //Nome esteso
-prodotto1.NomeEsteso();
+Console.WriteLine(prodotto1.NomeEsteso());
 
 Console.WriteLine(prodotto1.CodicePadLeft());
 
@@ -111,9 +111,9 @@ public class Prodotto
     }
 
     //ritorna il codice prodotto concatenato con il nome del prodotto
-    public void NomeEsteso()
+    public string NomeEsteso()
     {
-        Console.WriteLine(Codice + " " + Nome);
+        return Codice + " " + Nome;
     }
 
 
